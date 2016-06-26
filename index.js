@@ -13,5 +13,5 @@ const db = firebase.database();
 const ref = db.ref("server/data");
 
 ref.set({
-  foo: 'blue bird'
+  foo: 'working'
 });
