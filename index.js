@@ -1,4 +1,6 @@
-const firebase = require("firebase");
+const firebase = require('firebase');
+const moment = require('moment');
+const request = require('request');
 
 firebase.initializeApp({
   serviceAccount: {
@@ -12,6 +14,18 @@ firebase.initializeApp({
 const db = firebase.database();
 const ref = db.ref("server/data");
 
-ref.set({
-  foo: 'working'
-});
+request(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=denver&destinations=boulder&key=${process.env.WHEN_TO_LEAVE_API_KEY}`, (error, response, body) => {
+  if (!error && response.statusCode == 200) {
+    console.log(JSON.parse(body)) // Show the HTML for the Google homepage.
+  }
+
+  const key = moment().format('H-m');
+  /*
+    {
+
+    }
+  */
+  ref.set({
+    [key]: JSON.parse(body).rows[0].elements[0].duration.text
+  });
+})
