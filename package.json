@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/songawee/when-to-leave/issues"
   },
-  "homepage": "https://github.com/songawee/when-to-leave#readme"
+  "homepage": "https://github.com/songawee/when-to-leave#readme",
+  "dependencies": {
+    "firebase": "^3.0.5"
+  }
 }
